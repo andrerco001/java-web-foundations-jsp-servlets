@@ -1,0 +1,20 @@
+#creditos {
+	font-size: 10px;
+}
+
+body {
+	background: #000000;
+	color: #FFFFFF;
+}
+
+h3 {
+	color: #449d44;
+}
+
+.btn {
+	background: #449d44;
+}
+
+#h4error {
+	color: #c12e2a;
+}
