@@ -1,7 +1,9 @@
 package ca.temspotify.controller;
 
 import java.io.IOException;
+import java.util.List;
 
+import ca.temspotify.dao.UsuarioDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -20,14 +22,20 @@ public class LoginServlet extends HttpServlet {
 		String email = req.getParameter("txtEmail");
 		String senha = req.getParameter("txtSenha");
 		String pagina;
-		
-		if(email.equals("jean@jean.ca") && senha.equals("1234")) {
+
+		List<Object> res;
+		UsuarioDAO userDAO = new UsuarioDAO();
+		res = userDAO.read(null);
+
+		if (email.equals("jean@jean.ca") && senha.equals("1234")) {
+			/* simular uma recuperacao do Banco de Dados */
 			pagina = "/myaccount.jsp";
+			req.getSession().setAttribute("Usuario", res.get(0));
 		} else {
-			req.setAttribute("errorSTR", "Email / Senha não encontrados!");			
 			pagina = "/error.jsp";
+			req.setAttribute("errorSTR", "Email / Senha não encontrados!");
 		}
-		
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(pagina);
 		dispatcher.forward(req, resp);
 	}
